@@ -6,7 +6,7 @@
     "dev": "next dev",
     "dev:admin": "npm run dev --prefix admin-portal",
     "dev:all": "npx -y concurrently \"npm run dev\" \"npm run dev:admin\"",
-    "build": "cross-env NODE_ENV=production next build",
+    "build": "prisma generate && cross-env NODE_ENV=production next build",
     "start": "next start",
     "lint": "next lint",
     "prisma:generate": "prisma generate",
