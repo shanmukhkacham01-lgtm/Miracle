@@ -1,0 +1,11 @@
+{
+  "name": "miracle-workspace",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev:server": "npm run dev --prefix server",
+    "dev:client": "npm run dev --prefix client",
+    "dev:admin": "npm run dev --prefix admin-portal",
+    "dev": "npx -y concurrently \"npm run dev:server\" \"npm run dev:client\" \"npm run dev:admin\""
+  }
+}

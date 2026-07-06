@@ -1,0 +1,32 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-luxury-bg text-luxury-text dark:bg-luxury-darkBg dark:text-luxury-darkText transition-colors duration-300 antialiased selection:bg-luxury-gold selection:text-white;
+  }
+}
+
+/* Custom premium transitions and custom inputs */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Custom dual-range input styling */
+input[type="range"]::-webkit-slider-thumb {
+  pointer-events: auto;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #C8A97E;
+  cursor: pointer;
+  -webkit-appearance: none;
+}

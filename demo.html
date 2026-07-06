@@ -1,0 +1,1449 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MIRACLE | Discover the Extraordinary</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- Canvas Confetti CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            luxury: {
+              bg: '#FAFAF8',
+              card: '#FFFFFF',
+              text: '#111111',
+              muted: '#666666',
+              border: '#E8E8E8',
+              gold: '#C8A97E',
+              success: '#22C55E',
+              danger: '#EF4444',
+              darkBg: '#121212',
+              darkCard: '#1C1C1E',
+              darkText: '#F5F5F7',
+              darkMuted: '#8E8E93',
+              darkBorder: '#2C2C2E',
+            }
+          },
+          fontFamily: {
+            serif: ['Playfair Display', 'Didot', 'Georgia', 'serif'],
+            sans: ['Inter', 'sans-serif'],
+          },
+          borderRadius: {
+            luxury: '12px',
+          },
+          boxShadow: {
+            luxury: '0 4px 20px -2px rgba(17, 17, 17, 0.04), 0 2px 6px -1px rgba(17, 17, 17, 0.02)',
+            luxuryHover: '0 12px 30px -4px rgba(17, 17, 17, 0.08), 0 4px 12px -2px rgba(17, 17, 17, 0.04)',
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      transition: background-color 0.3s, color 0.3s;
+    }
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+</head>
+<body class="bg-luxury-bg text-luxury-text dark:bg-luxury-darkBg dark:text-luxury-darkText min-h-screen flex flex-col antialiased">
+
+  <!-- TOP BAR NEWSLETTER PROMO -->
+  <div class="bg-luxury-text dark:bg-black text-white text-[10px] tracking-[3px] uppercase text-center py-2 font-semibold">
+    Complimentary Global Priority Shipping Over $200
+  </div>
+
+  <!-- NAVIGATION HEADER -->
+  <header class="sticky top-0 z-40 w-full border-b border-luxury-border/80 bg-luxury-bg/95 backdrop-blur-md dark:border-luxury-darkBorder/80 dark:bg-luxury-darkBg/95 transition-all">
+    <div class="mx-auto flex h-16 max-w-7xl items-center justify-between px-6 lg:px-8">
+      
+      <!-- Left: Logo & Nav Toggles -->
+      <div class="flex items-center space-x-6">
+        <button onclick="toggleMobileMenu(true)" class="p-1 lg:hidden hover:text-luxury-gold transition-colors">
+          <i data-lucide="menu" class="w-5 h-5"></i>
+        </button>
+        
+        <div class="hidden lg:flex items-center space-x-4 text-xs font-semibold tracking-wider text-luxury-muted dark:text-luxury-darkMuted">
+          <div class="relative group cursor-pointer py-1">
+            <span class="hover:text-luxury-text dark:hover:text-luxury-darkText flex items-center space-x-1 uppercase">
+              <span id="activeCurrency">USD ($)</span>
+            </span>
+            <div class="absolute top-full left-0 mt-1 hidden group-hover:block bg-white dark:bg-luxury-darkCard border border-luxury-border dark:border-luxury-darkBorder rounded-luxury shadow-luxury py-1 min-w-[90px] z-50">
+              <button onclick="changeCurrency('USD')" class="block w-full px-3 py-1.5 text-left hover:bg-luxury-bg dark:hover:bg-luxury-darkBg hover:text-luxury-gold uppercase">USD</button>
+              <button onclick="changeCurrency('EUR')" class="block w-full px-3 py-1.5 text-left hover:bg-luxury-bg dark:hover:bg-luxury-darkBg hover:text-luxury-gold uppercase">EUR</button>
+              <button onclick="changeCurrency('GBP')" class="block w-full px-3 py-1.5 text-left hover:bg-luxury-bg dark:hover:bg-luxury-darkBg hover:text-luxury-gold uppercase">GBP</button>
+              <button onclick="changeCurrency('INR')" class="block w-full px-3 py-1.5 text-left hover:bg-luxury-bg dark:hover:bg-luxury-darkBg hover:text-luxury-gold uppercase">INR</button>
+            </div>
+          </div>
+          <span class="opacity-30">|</span>
+          <div class="relative group cursor-pointer py-1">
+            <span class="hover:text-luxury-text dark:hover:text-luxury-darkText flex items-center space-x-1 uppercase">
+              <i data-lucide="globe" class="w-3.5 h-3.5 mr-1"></i>
+              <span id="activeLanguage">EN</span>
+            </span>
+            <div class="absolute top-full left-0 mt-1 hidden group-hover:block bg-white dark:bg-luxury-darkCard border border-luxury-border dark:border-luxury-darkBorder rounded-luxury shadow-luxury py-1 min-w-[70px] z-50">
+              <button onclick="changeLanguage('EN')" class="block w-full px-3 py-1.5 text-left hover:bg-luxury-bg dark:hover:bg-luxury-darkBg hover:text-luxury-gold uppercase">EN</button>
+              <button onclick="changeLanguage('FR')" class="block w-full px-3 py-1.5 text-left hover:bg-luxury-bg dark:hover:bg-luxury-darkBg hover:text-luxury-gold uppercase">FR</button>
+              <button onclick="changeLanguage('ES')" class="block w-full px-3 py-1.5 text-left hover:bg-luxury-bg dark:hover:bg-luxury-darkBg hover:text-luxury-gold uppercase">ES</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Center: Brand Wordmark -->
+      <div>
+        <button onclick="showPage('home')" class="font-serif text-2xl font-semibold tracking-[6px] text-luxury-text dark:text-luxury-darkText hover:text-luxury-gold transition-colors">
+          MIRACLE
+        </button>
+      </div>
+
+      <!-- Right: Desktop Navigation Links & Actions -->
+      <div class="flex items-center space-x-6">
+        <nav class="hidden lg:flex items-center space-x-8 text-xs font-semibold tracking-widest uppercase">
+          <button onclick="showPage('shop')" class="hover:text-luxury-gold transition-colors">Shop</button>
+          <button onclick="showPage('blogs')" class="hover:text-luxury-gold transition-colors">Editorial</button>
+          <button onclick="showPage('dashboard')" class="hover:text-luxury-gold transition-colors font-bold text-luxury-gold">Dashboard</button>
+          <button onclick="showPage('admin')" class="hover:text-luxury-gold transition-colors">Admin</button>
+        </nav>
+
+        <div class="flex items-center space-x-4 border-l border-luxury-border dark:border-luxury-darkBorder pl-6">
+          <!-- Search button -->
+          <button onclick="toggleSearchModal(true)" class="p-1 hover:text-luxury-gold transition-colors" title="Search">
+            <i data-lucide="search" class="w-4.5 h-4.5"></i>
+          </button>
+
+          <!-- Theme Button -->
+          <button onclick="toggleTheme()" class="p-1 hover:text-luxury-gold transition-colors" title="Theme">
+            <i id="themeIcon" data-lucide="moon" class="w-4.5 h-4.5"></i>
+          </button>
+
+          <!-- Cart Button -->
+          <button onclick="toggleCartDrawer(true)" class="relative p-1 hover:text-luxury-gold transition-colors" title="Cart">
+            <i data-lucide="shopping-bag" class="w-4.5 h-4.5"></i>
+            <span id="cartCountBadge" class="absolute -top-1.5 -right-1.5 hidden h-4.5 w-4.5 items-center justify-center rounded-full bg-luxury-gold text-[9px] font-bold text-white">0</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- HOME PAGE -->
+  <div id="page-home" class="page-view space-y-20 pb-20">
+    <!-- Hero Banner -->
+    <section class="relative h-[85vh] w-full overflow-hidden bg-black flex items-center">
+      <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1490481651871-ab68de25d43d?q=80&w=1600')] bg-cover bg-center opacity-45"></div>
+      <div class="absolute inset-0 bg-gradient-to-r from-black/80 via-black/35 to-transparent"></div>
+      <div class="relative mx-auto max-w-7xl w-full px-6 lg:px-8 text-white z-10 space-y-6">
+        <span class="text-[10px] font-bold text-luxury-gold tracking-[6px] uppercase block">
+          Miracle Collection 2026
+        </span>
+        <h1 class="font-serif text-5xl md:text-7xl font-light tracking-wide max-w-2xl leading-[1.1]">
+          Elevate Everyday Living
+        </h1>
+        <p class="text-sm md:text-base font-light tracking-wider text-[#CCCCCC] max-w-lg leading-relaxed">
+          Discover premium clothing, acoustics, and home items crafted with architectural elegance and minimal luxury.
+        </p>
+        <div class="flex space-x-4 pt-4">
+          <button onclick="showPage('shop')" class="px-8 py-3.5 bg-white hover:bg-luxury-gold text-luxury-text hover:text-white text-xs font-bold tracking-widest uppercase rounded-luxury transition-all duration-300">
+            Shop Now
+          </button>
+          <button onclick="showPage('blogs')" class="px-8 py-3.5 border border-white hover:border-luxury-gold hover:text-luxury-gold text-white text-xs font-bold tracking-widest uppercase rounded-luxury transition-all duration-300">
+            Explore Collection
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Categories ribbon -->
+    <section class="mx-auto max-w-7xl px-6 lg:px-8 space-y-6">
+      <div class="text-center space-y-2">
+        <span class="text-[10px] font-bold text-luxury-gold tracking-[4px] uppercase block">Curated Catalog</span>
+        <h2 class="font-serif text-3xl font-semibold">Featured Categories</h2>
+      </div>
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+        <div onclick="showPage('shop', 'fashion')" class="group cursor-pointer relative aspect-square overflow-hidden rounded-luxury bg-luxury-border/30 border border-luxury-border/60">
+          <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?q=80&w=400" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="">
+          <div class="absolute inset-0 bg-black/35 group-hover:bg-black/45 transition-colors"></div>
+          <div class="absolute inset-0 flex items-center justify-center text-white"><span class="text-xs font-bold uppercase tracking-widest">Fashion</span></div>
+        </div>
+        <div onclick="showPage('shop', 'electronics')" class="group cursor-pointer relative aspect-square overflow-hidden rounded-luxury bg-luxury-border/30 border border-luxury-border/60">
+          <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=400" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="">
+          <div class="absolute inset-0 bg-black/35 group-hover:bg-black/45 transition-colors"></div>
+          <div class="absolute inset-0 flex items-center justify-center text-white"><span class="text-xs font-bold uppercase tracking-widest">Acoustics</span></div>
+        </div>
+        <div onclick="showPage('shop', 'beauty')" class="group cursor-pointer relative aspect-square overflow-hidden rounded-luxury bg-luxury-border/30 border border-luxury-border/60">
+          <img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?q=80&w=400" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="">
+          <div class="absolute inset-0 bg-black/35 group-hover:bg-black/45 transition-colors"></div>
+          <div class="absolute inset-0 flex items-center justify-center text-white"><span class="text-xs font-bold uppercase tracking-widest">Beauty</span></div>
+        </div>
+        <div onclick="showPage('shop', 'home')" class="group cursor-pointer relative aspect-square overflow-hidden rounded-luxury bg-luxury-border/30 border border-luxury-border/60">
+          <img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?q=80&w=400" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="">
+          <div class="absolute inset-0 bg-black/35 group-hover:bg-black/45 transition-colors"></div>
+          <div class="absolute inset-0 flex items-center justify-center text-white"><span class="text-xs font-bold uppercase tracking-widest">Home</span></div>
+        </div>
+        <div onclick="showPage('shop', 'footwear')" class="group cursor-pointer relative aspect-square overflow-hidden rounded-luxury bg-luxury-border/30 border border-luxury-border/60">
+          <img src="https://images.unsplash.com/photo-1549298916-b41d501d3772?q=80&w=400" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="">
+          <div class="absolute inset-0 bg-black/35 group-hover:bg-black/45 transition-colors"></div>
+          <div class="absolute inset-0 flex items-center justify-center text-white"><span class="text-xs font-bold uppercase tracking-widest">Footwear</span></div>
+        </div>
+        <div onclick="showPage('shop', 'accessories')" class="group cursor-pointer relative aspect-square overflow-hidden rounded-luxury bg-luxury-border/30 border border-luxury-border/60">
+          <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=400" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="">
+          <div class="absolute inset-0 bg-black/35 group-hover:bg-black/45 transition-colors"></div>
+          <div class="absolute inset-0 flex items-center justify-center text-white"><span class="text-xs font-bold uppercase tracking-widest">Accessories</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Best sellers list -->
+    <section class="mx-auto max-w-7xl px-6 lg:px-8 space-y-8">
+      <div class="flex justify-between items-baseline border-b border-luxury-border dark:border-luxury-darkBorder pb-4">
+        <div>
+          <span class="text-[10px] font-bold text-luxury-gold tracking-[4px] uppercase block">Highly Coveted</span>
+          <h2 class="font-serif text-3xl font-semibold mt-1">Our Best Sellers</h2>
+        </div>
+        <button onclick="showPage('shop')" class="text-xs font-bold uppercase tracking-widest flex items-center hover:text-luxury-gold transition-colors">
+          View All Products <i data-lucide="arrow-right" class="w-3.5 h-3.5 ml-1"></i>
+        </button>
+      </div>
+      <div id="bestSellersContainer" class="grid grid-cols-2 lg:grid-cols-4 gap-6">
+        <!-- Loaded via JavaScript -->
+      </div>
+    </section>
+
+    <!-- Countdown flash sale -->
+    <section class="mx-auto max-w-7xl px-6 lg:px-8">
+      <div class="relative rounded-luxury overflow-hidden bg-black text-white px-8 py-16 flex flex-col md:flex-row items-center justify-between gap-8">
+        <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1549298916-b41d501d3772?q=80&w=1200')] bg-cover bg-center opacity-25"></div>
+        <div class="relative z-10 space-y-4 max-w-md">
+          <span class="text-[10px] font-bold text-luxury-gold tracking-[4px] uppercase flex items-center">
+            <i data-lucide="clock" class="w-3.5 h-3.5 mr-1.5 animate-pulse text-luxury-gold"></i>
+            Limited Time Event
+          </span>
+          <h2 class="font-serif text-3xl md:text-4xl font-semibold">Seasonal Flash Sale</h2>
+          <p class="text-xs text-[#CCCCCC] leading-relaxed">
+            Acquire signature luxury footwear and cashmere items at special rates. Use promo code <span class="font-bold text-white uppercase tracking-widest font-mono bg-white/10 px-2 py-0.5 rounded-sm">WELCOME10</span> at checkout for 10% off.
+          </p>
+        </div>
+        <div class="relative z-10 flex flex-col items-center md:items-end space-y-4">
+          <div class="bg-white/10 backdrop-blur-md border border-white/20 rounded-luxury px-6 py-4 text-center">
+            <span class="text-[10px] font-bold uppercase tracking-widest block mb-1 text-luxury-gold">Offers End In</span>
+            <span id="countdownTimer" class="font-mono text-3xl font-bold tracking-wider">18:00:00</span>
+          </div>
+          <button onclick="showPage('shop')" class="px-8 py-3 bg-luxury-gold text-white text-xs font-bold tracking-widest uppercase rounded-luxury hover:bg-white hover:text-luxury-text transition-all duration-300">
+            Explore Offers
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Client testimonials -->
+    <section class="mx-auto max-w-7xl px-6 lg:px-8 space-y-8">
+      <div class="text-center">
+        <span class="text-[10px] font-bold text-luxury-gold tracking-[4px] uppercase block">Circle of Trust</span>
+        <h2 class="font-serif text-3xl font-semibold mt-1">Client Reviews</h2>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div class="bg-white dark:bg-luxury-darkCard border border-luxury-border dark:border-luxury-darkBorder p-8 rounded-luxury shadow-luxury space-y-4">
+          <div class="flex space-x-1 text-luxury-gold">
+            <i data-lucide="star" class="w-3.5 h-3.5 fill-[#C8A97E]"></i>
+            <i data-lucide="star" class="w-3.5 h-3.5 fill-[#C8A97E]"></i>
+            <i data-lucide="star" class="w-3.5 h-3.5 fill-[#C8A97E]"></i>
+            <i data-lucide="star" class="w-3.5 h-3.5 fill-[#C8A97E]"></i>
+            <i data-lucide="star" class="w-3.5 h-3.5 fill-[#C8A97E]"></i>
+          </div>
+          <p class="text-sm font-medium leading-relaxed italic text-luxury-muted dark:text-luxury-darkMuted">
+            "The cashmere coat is absolutely exquisite. The weight is perfect and it drapes beautifully. A timeless piece that rivals old-money luxury brands."
+          </p>
+          <div>
+            <h4 class="text-xs font-bold uppercase tracking-wider">Victoria Hastings</h4>
+            <p class="text-[9px] text-luxury-gold tracking-widest uppercase font-semibold mt-0.5">Fashion Consultant</p>
+          </div>
+        </div>
+        <div class="bg-white dark:bg-luxury-darkCard border border-luxury-border dark:border-luxury-darkBorder p-8 rounded-luxury shadow-luxury space-y-4">
+          <div class="flex space-x-1 text-luxury-gold">
+            <i data-lucide="star" class="w-3.5 h-3.5 fill-[#C8A97E]"></i>
+            <i data-lucide="star" class="w-3.5 h-3.5 fill-[#C8A97E]"></i>
+            <i data-lucide="star" class="w-3.5 h-3.5 fill-[#C8A97E]"></i>
+            <i data-lucide="star" class="w-3.5 h-3.5 fill-[#C8A97E]"></i>
+            <i data-lucide="star" class="w-3.5 h-3.5 fill-[#C8A97E]"></i>
+          </div>
+          <p class="text-sm font-medium leading-relaxed italic text-luxury-muted dark:text-luxury-darkMuted">
+            "Miracle ANC headphones represent pure form and function. Excellent response curves and the aluminum chassis feels solid yet incredibly light."
+          </p>
+          <div>
+            <h4 class="text-xs font-bold uppercase tracking-wider">Marcus Sterling</h4>
+            <p class="text-[9px] text-luxury-gold tracking-widest uppercase font-semibold mt-0.5">Architect</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- SHOP PAGE -->
+  <div id="page-shop" class="page-view hidden mx-auto max-w-7xl w-full px-6 py-10 lg:px-8 space-y-6">
+    <div class="flex flex-col md:flex-row justify-between items-baseline gap-4 border-b border-luxury-border dark:border-luxury-darkBorder pb-5">
+      <div>
+        <h1 class="font-serif text-3xl font-semibold">Shop Catalog</h1>
+        <p class="text-xs text-luxury-muted dark:text-luxury-darkMuted mt-1">Acquire luxury essentials with structural forms.</p>
+      </div>
+      <div class="flex items-center space-x-4">
+        <select onchange="updateSort(this.value)" class="bg-transparent border border-luxury-border dark:border-luxury-darkBorder rounded-luxury px-3 py-1.5 text-xs font-semibold focus:outline-none">
+          <option value="newest">Newest Arrivals</option>
+          <option value="popular">Customer Favorites</option>
+          <option value="low-to-high">Price: Low to High</option>
+          <option value="high-to-low">Price: High to Low</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+      <!-- Left Filters Sidebar -->
+      <aside class="space-y-6 pr-4 border-r border-luxury-border/60 dark:border-luxury-darkBorder/60">
+        <div class="flex justify-between items-center">
+          <span class="text-xs font-bold uppercase tracking-widest">Filter Settings</span>
+          <button onclick="resetFilters()" class="text-[10px] uppercase font-bold tracking-wider text-luxury-gold hover:underline">Reset</button>
+        </div>
+        <!-- Categories filter -->
+        <div class="space-y-2">
+          <h4 class="text-xs font-bold uppercase tracking-wider text-luxury-muted">Categories</h4>
+          <div id="categoryFilters" class="space-y-1.5 text-xs font-medium"></div>
+        </div>
+        <!-- Brands filter -->
+        <div class="space-y-2 pt-4 border-t border-luxury-border dark:border-luxury-darkBorder">
+          <h4 class="text-xs font-bold uppercase tracking-wider text-luxury-muted">Brands</h4>
+          <div id="brandFilters" class="space-y-1.5 text-xs font-medium"></div>
+        </div>
+      </aside>
+
+      <!-- Right Products Grid -->
+      <main class="lg:col-span-3">
+        <div id="productsGrid" class="grid grid-cols-2 lg:grid-cols-3 gap-6"></div>
+      </main>
+    </div>
+  </div>
+
+  <!-- PRODUCT DETAIL OVERLAY MODAL -->
+  <div id="detailModal" class="fixed inset-0 z-50 hidden overflow-y-auto bg-black/55 backdrop-blur-xs flex items-center justify-center p-4">
+    <div class="bg-white dark:bg-luxury-darkCard border border-luxury-border dark:border-luxury-darkBorder w-full max-w-4xl rounded-luxury overflow-hidden shadow-luxuryHover max-h-[90vh] flex flex-col md:flex-row">
+      <!-- Left Gallery -->
+      <div class="w-full md:w-1/2 p-6 bg-luxury-bg/30 dark:bg-luxury-darkBg flex flex-col justify-between">
+        <div class="relative aspect-[3/4] overflow-hidden rounded-luxury border border-luxury-border dark:border-luxury-darkBorder">
+          <img id="detailMainImage" src="" class="w-full h-full object-cover transition-transform duration-500 hover:scale-105" alt="">
+          <button onclick="toggle360()" class="absolute bottom-4 right-4 p-2 bg-white/90 dark:bg-black/80 rounded-full shadow-sm" title="360 view">
+            <i data-lucide="rotate-cw" class="w-4 h-4 text-luxury-text dark:text-white"></i>
+          </button>
+        </div>
+        <!-- Thumbnails -->
+        <div id="detailThumbs" class="flex space-x-2.5 overflow-x-auto no-scrollbar pt-4"></div>
+      </div>
+
+      <!-- Right Specifications & Buy -->
+      <div class="w-full md:w-1/2 p-8 overflow-y-auto max-h-[80vh] space-y-6 no-scrollbar">
+        <div class="flex justify-between items-start">
+          <div>
+            <span id="detailBrandName" class="text-xs font-bold text-luxury-gold uppercase tracking-widest">BRAND</span>
+            <h2 id="detailProductName" class="font-serif text-2xl font-semibold pt-1">Product Title</h2>
+          </div>
+          <button onclick="closeProductModal()" class="p-1 text-luxury-muted hover:text-luxury-gold"><i data-lucide="x" class="w-5 h-5"></i></button>
+        </div>
+
+        <div class="flex items-baseline space-x-3">
+          <span id="detailProductPrice" class="text-xl font-bold">$0.00</span>
+          <span id="detailProductComparePrice" class="text-xs text-luxury-muted line-through">$0.00</span>
+        </div>
+
+        <p id="detailProductDesc" class="text-xs text-luxury-muted leading-relaxed">Description goes here.</p>
+
+        <!-- Variants selection -->
+        <div id="detailProductVariants" class="space-y-4 pt-4 border-t border-luxury-border dark:border-luxury-darkBorder"></div>
+
+        <!-- Add to Bag -->
+        <div class="pt-4 border-t border-luxury-border dark:border-luxury-darkBorder space-y-3">
+          <button onclick="addActiveProductToCart()" class="w-full py-3.5 bg-luxury-text hover:bg-luxury-gold text-white text-xs font-bold tracking-widest uppercase rounded-luxury transition-all flex items-center justify-center space-x-2">
+            <i data-lucide="shopping-bag" class="w-4 h-4"></i>
+            <span>Add to Bag</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CHECKOUT PAGE -->
+  <div id="page-checkout" class="page-view hidden mx-auto max-w-4xl px-6 py-12">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+      <!-- Address Forms -->
+      <form onsubmit="placeOrderDemo(event)" class="space-y-6 text-xs font-semibold">
+        <h2 class="font-serif text-xl font-semibold border-b border-luxury-border pb-3">Checkout Details</h2>
+        <div class="space-y-3">
+          <label class="uppercase text-luxury-muted">Full Name</label>
+          <input type="text" required placeholder="Julian Gray" class="w-full bg-transparent border border-luxury-border dark:border-luxury-darkBorder rounded-luxury px-3 py-2 outline-none focus:border-luxury-gold">
+        </div>
+        <div class="space-y-3">
+          <label class="uppercase text-luxury-muted">Street Address</label>
+          <input type="text" required placeholder="452 Mercer Street" class="w-full bg-transparent border border-luxury-border dark:border-luxury-darkBorder rounded-luxury px-3 py-2 outline-none focus:border-luxury-gold">
+        </div>
+        <div class="grid grid-cols-2 gap-4">
+          <div class="space-y-3">
+            <label class="uppercase text-luxury-muted">City</label>
+            <input type="text" required placeholder="New York" class="w-full bg-transparent border border-luxury-border dark:border-luxury-darkBorder rounded-luxury px-3 py-2 outline-none focus:border-luxury-gold">
+          </div>
+          <div class="space-y-3">
+            <label class="uppercase text-luxury-muted">Postal Code</label>
+            <input type="text" required placeholder="10012" class="w-full bg-transparent border border-luxury-border dark:border-luxury-darkBorder rounded-luxury px-3 py-2 outline-none focus:border-luxury-gold">
+          </div>
+        </div>
+        
+        <div class="space-y-3 pt-3">
+          <label class="uppercase text-luxury-muted block">Payment Method</label>
+          <div class="grid grid-cols-3 gap-2 pt-1.5">
+            <button type="button" onclick="setCheckoutPayment('card')" class="p-2 border rounded-luxury flex flex-col items-center justify-center hover:border-luxury-gold">
+              <i data-lucide="credit-card" class="w-4 h-4 mb-1"></i>Card
+            </button>
+            <button type="button" onclick="setCheckoutPayment('upi')" class="p-2 border rounded-luxury flex flex-col items-center justify-center hover:border-luxury-gold">
+              <i data-lucide="qr-code" class="w-4 h-4 mb-1"></i>UPI Scan
+            </button>
+            <button type="button" onclick="setCheckoutPayment('cod')" class="p-2 border rounded-luxury flex flex-col items-center justify-center hover:border-luxury-gold">
+              <i data-lucide="truck" class="w-4 h-4 mb-1"></i>COD
+            </button>
+          </div>
+        </div>
+
+        <!-- Dynamic Payment Options View -->
+        <div id="checkoutPaymentArea" class="p-4 border border-luxury-border dark:border-luxury-darkBorder rounded-luxury text-xs text-luxury-muted">
+          Select a payment method above.
+        </div>
+
+        <button type="submit" class="w-full py-4 bg-luxury-text hover:bg-luxury-gold text-white text-xs font-bold tracking-widest uppercase rounded-luxury transition-all">
+          Place Order
+        </button>
+      </form>
+
+      <!-- Cart totals review -->
+      <div class="bg-white dark:bg-luxury-darkCard border border-luxury-border dark:border-luxury-darkBorder p-6 rounded-luxury shadow-luxury space-y-4">
+        <h3 class="font-serif text-base font-semibold border-b border-luxury-border dark:border-luxury-darkBorder pb-2">Your Order</h3>
+        <div id="checkoutSummaryItems" class="space-y-3 max-h-[200px] overflow-y-auto no-scrollbar"></div>
+        
+        <div class="border-t border-luxury-border dark:border-luxury-darkBorder pt-4 space-y-2 text-xs font-semibold">
+          <div class="flex justify-between text-luxury-muted">
+            <span>Subtotal</span>
+            <span id="checkoutSubtotal">$0.00</span>
+          </div>
+          <div class="flex justify-between text-luxury-muted">
+            <span>Shipping Cost</span>
+            <span id="checkoutShipping">$0.00</span>
+          </div>
+          <div class="flex justify-between text-luxury-muted">
+            <span>Tax (8%)</span>
+            <span id="checkoutTax">$0.00</span>
+          </div>
+          <div class="border-t pt-2 flex justify-between text-sm font-bold text-luxury-text dark:text-white">
+            <span>Grand Total</span>
+            <span id="checkoutTotal">$0.00</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DASHBOARD PAGE -->
+  <div id="page-dashboard" class="page-view hidden mx-auto max-w-4xl px-6 py-12 space-y-6">
+    <h2 class="font-serif text-2xl font-semibold border-b border-luxury-border dark:border-luxury-darkBorder pb-3">User Dashboard</h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div class="border border-luxury-border dark:border-luxury-darkBorder p-5 rounded-luxury space-y-4 text-xs font-semibold">
+        <p class="text-luxury-gold uppercase tracking-widest">Client Profile</p>
+        <p>Name: Julian Gray</p>
+        <p>Email: user@miracle.luxury</p>
+        <p class="pt-2 border-t text-[10px] text-luxury-muted uppercase">Referral Code: <span class="font-mono font-bold text-luxury-text dark:text-white">MRC-USER77</span></p>
+      </div>
+      <div class="border border-luxury-border dark:border-luxury-darkBorder p-5 rounded-luxury text-center flex flex-col justify-center space-y-1">
+        <span class="text-[10px] font-bold text-luxury-muted uppercase tracking-widest">Available Balance</span>
+        <span class="text-3xl font-mono font-bold text-luxury-gold">120</span>
+        <span class="text-[9px] text-luxury-muted uppercase font-bold">Reward Points</span>
+      </div>
+      <div class="border border-luxury-border dark:border-luxury-darkBorder p-5 rounded-luxury text-center flex flex-col justify-center space-y-2">
+        <span class="text-[10px] font-bold text-luxury-muted uppercase tracking-widest">Recent Activity</span>
+        <span class="text-xs font-semibold block text-luxury-success flex items-center justify-center">
+          <i data-lucide="check" class="w-3.5 h-3.5 mr-1"></i>Order Shipped
+        </span>
+      </div>
+    </div>
+    
+    <!-- Tracking order status list -->
+    <div class="border border-luxury-border dark:border-luxury-darkBorder rounded-luxury p-6 space-y-4">
+      <h3 class="font-serif text-base font-semibold border-b border-luxury-border dark:border-luxury-darkBorder pb-2">Active Shipments</h3>
+      <div class="space-y-4">
+        <div class="flex justify-between items-center text-xs">
+          <div>
+            <p class="font-semibold">Order #MRL-88392-10</p>
+            <p class="text-[10px] text-luxury-muted mt-0.5">TRACKING: 1Z999AA10123456784</p>
+          </div>
+          <span class="px-2 py-0.5 bg-luxury-gold/10 text-luxury-gold rounded-luxury font-bold text-[9px] uppercase tracking-wider">Shipped</span>
+        </div>
+        <div class="flex justify-between text-[9px] font-bold text-luxury-muted uppercase tracking-wider">
+          <span class="text-luxury-gold">Placed</span>
+          <span class="text-luxury-gold">Paid</span>
+          <span class="text-luxury-gold">Shipped</span>
+          <span>Delivered</span>
+        </div>
+        <div class="relative w-full h-1 bg-luxury-border dark:bg-luxury-darkBorder rounded-full">
+          <div class="absolute top-0 left-0 h-full bg-luxury-gold" style="width: 75%;"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ADMIN PAGE -->
+  <div id="page-admin" class="page-view hidden mx-auto max-w-5xl px-6 py-12 space-y-8">
+    <div class="flex items-center space-x-3 border-b border-luxury-border dark:border-luxury-darkBorder pb-4">
+      <i data-lucide="shield" class="w-6 h-6 text-luxury-gold"></i>
+      <div>
+        <h1 class="font-serif text-2xl font-semibold">MIRACLE Admin Console</h1>
+        <p class="text-[9px] text-luxury-muted uppercase tracking-widest font-semibold">Platform Management &amp; Analytics</p>
+      </div>
+    </div>
+
+    <!-- KPIs Grid -->
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-6">
+      <div class="bg-white dark:bg-luxury-darkCard border border-luxury-border dark:border-luxury-darkBorder p-5 rounded-luxury flex justify-between items-center">
+        <div>
+          <span class="text-[9px] font-bold uppercase tracking-wider text-luxury-muted">Revenue</span>
+          <p class="text-xl font-bold font-mono">$14,500.00</p>
+        </div>
+        <i data-lucide="trending-up" class="w-5 h-5 text-luxury-gold"></i>
+      </div>
+      <div class="bg-white dark:bg-luxury-darkCard border border-luxury-border dark:border-luxury-darkBorder p-5 rounded-luxury flex justify-between items-center">
+        <div>
+          <span class="text-[9px] font-bold uppercase tracking-wider text-luxury-muted">Orders</span>
+          <p class="text-xl font-bold font-mono">110</p>
+        </div>
+        <i data-lucide="shopping-bag" class="w-5 h-5 text-luxury-gold"></i>
+      </div>
+      <div class="bg-white dark:bg-luxury-darkCard border border-luxury-border dark:border-luxury-darkBorder p-5 rounded-luxury flex justify-between items-center">
+        <div>
+          <span class="text-[9px] font-bold uppercase tracking-wider text-luxury-muted">Clients</span>
+          <p class="text-xl font-bold font-mono">45</p>
+        </div>
+        <i data-lucide="users" class="w-5 h-5 text-luxury-gold"></i>
+      </div>
+      <div class="bg-white dark:bg-luxury-darkCard border border-luxury-border dark:border-luxury-darkBorder p-5 rounded-luxury flex justify-between items-center">
+        <div>
+          <span class="text-[9px] font-bold uppercase tracking-wider text-luxury-muted">Products</span>
+          <p class="text-xl font-bold font-mono" id="adminKpiProducts">7</p>
+        </div>
+        <i data-lucide="layers" class="w-5 h-5 text-luxury-gold"></i>
+      </div>
+    </div>
+
+    <!-- Analytics Graphs & CRUD -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+      <!-- Create product form -->
+      <form onsubmit="adminAddProduct(event)" class="lg:col-span-5 bg-white dark:bg-luxury-darkCard border border-luxury-border dark:border-luxury-darkBorder p-6 rounded-luxury space-y-4 text-xs font-semibold">
+        <h3 class="font-serif text-base font-semibold border-b border-luxury-border dark:border-luxury-darkBorder pb-2">Add New Product</h3>
+        <div class="space-y-1.5">
+          <label class="uppercase text-luxury-muted">Product Title</label>
+          <input type="text" id="apName" required placeholder="Luxury Wool Scarf" class="w-full bg-transparent border border-luxury-border dark:border-luxury-darkBorder rounded-luxury px-3 py-2 outline-none focus:border-luxury-gold">
+        </div>
+        <div class="grid grid-cols-2 gap-4">
+          <div class="space-y-1.5">
+            <label class="uppercase text-luxury-muted">Price ($)</label>
+            <input type="number" step="0.01" id="apPrice" required placeholder="120.00" class="w-full bg-transparent border border-luxury-border dark:border-luxury-darkBorder rounded-luxury px-3 py-2 outline-none focus:border-luxury-gold">
+          </div>
+          <div class="space-y-1.5">
+            <label class="uppercase text-luxury-muted">Stock</label>
+            <input type="number" id="apStock" required placeholder="15" class="w-full bg-transparent border border-luxury-border dark:border-luxury-darkBorder rounded-luxury px-3 py-2 outline-none focus:border-luxury-gold">
+          </div>
+        </div>
+        <div class="space-y-1.5">
+          <label class="uppercase text-luxury-muted">SKU</label>
+          <input type="text" id="apSku" required placeholder="MRC-WOL-SCF-09" class="w-full bg-transparent border border-luxury-border dark:border-luxury-darkBorder rounded-luxury px-3 py-2 outline-none focus:border-luxury-gold">
+        </div>
+        <div class="space-y-1.5">
+          <label class="uppercase text-luxury-muted">Category</label>
+          <select id="apCategory" required class="w-full bg-transparent border border-luxury-border dark:border-luxury-darkBorder rounded-luxury px-3 py-2 outline-none focus:border-luxury-gold">
+            <option value="Fashion">Fashion</option>
+            <option value="Electronics">Electronics</option>
+            <option value="Beauty">Beauty</option>
+            <option value="Home & Decor">Home</option>
+            <option value="Footwear">Footwear</option>
+            <option value="Accessories">Accessories</option>
+          </select>
+        </div>
+        <div class="space-y-1.5">
+          <label class="uppercase text-luxury-muted">Description</label>
+          <textarea id="apDesc" rows="3" required placeholder="Woven with organic raw materials..." class="w-full bg-transparent border border-luxury-border dark:border-luxury-darkBorder rounded-luxury px-3 py-2 outline-none focus:border-luxury-gold"></textarea>
+        </div>
+        <button type="submit" class="w-full py-2.5 bg-luxury-text hover:bg-luxury-gold text-white text-xs font-bold tracking-widest uppercase rounded-luxury transition-all">Add to Catalog</button>
+      </form>
+
+      <!-- Active products listing -->
+      <div class="lg:col-span-7 bg-white dark:bg-luxury-darkCard border border-luxury-border dark:border-luxury-darkBorder p-6 rounded-luxury space-y-4">
+        <h3 class="font-serif text-base font-semibold border-b border-luxury-border dark:border-luxury-darkBorder pb-2">Active Catalog</h3>
+        <div id="adminCatalogList" class="space-y-3 max-h-[300px] overflow-y-auto no-scrollbar"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- EDITORIAL BLOGS PAGE -->
+  <div id="page-blogs" class="page-view hidden mx-auto max-w-3xl px-6 py-12 space-y-8">
+    <div class="text-center space-y-2">
+      <span class="text-[10px] font-bold text-luxury-gold tracking-[5px] uppercase block">Miracle Lookbooks</span>
+      <h1 class="font-serif text-3xl font-semibold">Editorial &amp; Aesthetics</h1>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 pt-4">
+      <div class="border border-luxury-border dark:border-luxury-darkBorder rounded-luxury overflow-hidden shadow-luxury">
+        <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=600" class="w-full aspect-video object-cover" alt="">
+        <div class="p-6 space-y-2">
+          <span class="text-[9px] font-bold text-luxury-gold uppercase tracking-wider">Design Philosophy</span>
+          <h3 class="font-serif text-base font-semibold">The Art of Essentialism in Design</h3>
+          <p class="text-xs text-luxury-muted">Exploring why clean lines, raw materials, and whitespace compose the ultimate standard of luxury.</p>
+        </div>
+      </div>
+      <div class="border border-luxury-border dark:border-luxury-darkBorder rounded-luxury overflow-hidden shadow-luxury">
+        <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=600" class="w-full aspect-video object-cover" alt="">
+        <div class="p-6 space-y-2">
+          <span class="text-[9px] font-bold text-luxury-gold uppercase tracking-wider">Styling</span>
+          <h3 class="font-serif text-base font-semibold">A Guide to Styling Premium Whites</h3>
+          <p class="text-xs text-luxury-muted">How to combine knits, ivory accents, and drapery for a timeless wardrobe.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SHOPPING CART SLIDE-OVER DRAWER -->
+  <div id="cartDrawer" class="fixed inset-0 z-50 hidden overflow-hidden">
+    <!-- Backdrop -->
+    <div onclick="toggleCartDrawer(false)" class="absolute inset-0 bg-black/40 backdrop-blur-xs"></div>
+    <div class="pointer-events-none absolute inset-y-0 right-0 flex max-w-full pl-10">
+      <div class="pointer-events-auto w-screen max-w-md bg-white dark:bg-luxury-darkCard border-l border-luxury-border dark:border-luxury-darkBorder shadow-luxury flex flex-col justify-between">
+        
+        <!-- Header -->
+        <div class="flex items-center justify-between border-b border-luxury-border dark:border-luxury-darkBorder px-6 py-5">
+          <div class="flex items-center space-x-2">
+            <i data-lucide="shopping-bag" class="w-4.5 h-4.5"></i>
+            <span class="font-serif text-lg font-semibold">Your Bag (<span id="cartCountHeader">0</span>)</span>
+          </div>
+          <button onclick="toggleCartDrawer(false)" class="p-1 hover:text-luxury-gold"><i data-lucide="x" class="w-5 h-5"></i></button>
+        </div>
+
+        <!-- Items list -->
+        <div id="cartDrawerItems" class="flex-grow overflow-y-auto p-6 space-y-6 no-scrollbar">
+          <!-- Populated by JS -->
+        </div>
+
+        <!-- Totals & Checkout -->
+        <div class="border-t border-luxury-border dark:border-luxury-darkBorder px-6 py-6 bg-luxury-bg/50 dark:bg-luxury-darkBg/50 space-y-4">
+          <div class="flex justify-between text-xs font-semibold">
+            <span class="text-luxury-muted">Subtotal</span>
+            <span id="cartSubtotal">$0.00</span>
+          </div>
+          <div class="flex justify-between text-xs font-semibold">
+            <span class="text-luxury-muted">Shipping</span>
+            <span id="cartShipping">Free</span>
+          </div>
+          <div class="border-t pt-3 flex justify-between text-sm font-bold">
+            <span>Estimated Total</span>
+            <span id="cartGrandTotal">$0.00</span>
+          </div>
+          <button onclick="goToCheckout()" class="w-full py-3.5 bg-luxury-text dark:bg-luxury-darkText hover:bg-luxury-gold text-white dark:text-luxury-text hover:text-white transition-colors text-xs font-bold tracking-widest uppercase rounded-luxury">
+            Checkout
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- FLOATING LIVE CHAT -->
+  <div class="fixed bottom-6 right-6 z-40">
+    <div id="chatWindow" class="hidden mb-4 w-[330px] h-[380px] bg-white dark:bg-luxury-darkCard border border-luxury-border dark:border-luxury-darkBorder rounded-luxury shadow-luxuryHover overflow-hidden flex flex-col justify-between">
+      <div class="bg-luxury-text dark:bg-luxury-darkBorder p-4 flex justify-between items-center text-white">
+        <div>
+          <h4 class="text-xs font-bold uppercase tracking-widest">MIRACLE Relations</h4>
+          <p class="text-[9px] text-luxury-gold tracking-widest">Advisor Online</p>
+        </div>
+        <button onclick="toggleChat(false)" class="hover:text-luxury-gold"><i data-lucide="x" class="w-4 h-4"></i></button>
+      </div>
+      <div id="chatMessages" class="flex-grow p-4 overflow-y-auto space-y-3 no-scrollbar text-xs">
+        <div class="flex justify-start">
+          <div class="max-w-[80%] p-3 rounded-luxury bg-luxury-bg dark:bg-luxury-darkBg border border-luxury-border dark:border-luxury-darkBorder">
+            Welcome to MIRACLE client relations. How may we assist you today?
+          </div>
+        </div>
+      </div>
+      <div class="px-4 py-2 flex space-x-1.5 overflow-x-auto no-scrollbar border-t border-luxury-border dark:border-luxury-darkBorder">
+        <button onclick="sendChatMessage('Track Order')" class="whitespace-nowrap px-2.5 py-1 border text-[10px] font-semibold uppercase rounded-luxury hover:border-luxury-gold">Track Order</button>
+        <button onclick="sendChatMessage('Returns')" class="whitespace-nowrap px-2.5 py-1 border text-[10px] font-semibold uppercase rounded-luxury hover:border-luxury-gold">Returns</button>
+        <button onclick="sendChatMessage('Talk to agent')" class="whitespace-nowrap px-2.5 py-1 border text-[10px] font-semibold uppercase rounded-luxury hover:border-luxury-gold">Agent</button>
+      </div>
+    </div>
+    <button onclick="toggleChat()" class="flex items-center justify-center w-12 h-12 bg-luxury-text hover:bg-luxury-gold text-white rounded-full shadow-luxuryHover transition-colors duration-300">
+      <i data-lucide="message-square" class="w-5 h-5"></i>
+    </button>
+  </div>
+
+  <!-- SEARCH OVERLAY MODAL -->
+  <div id="searchModal" class="fixed inset-0 z-50 hidden bg-black/45 backdrop-blur-xs flex flex-col justify-start">
+    <div class="bg-luxury-bg dark:bg-luxury-darkCard border-b border-luxury-border dark:border-luxury-darkBorder w-full px-6 py-8">
+      <div class="mx-auto max-w-3xl space-y-6">
+        <div class="flex justify-between items-center">
+          <span class="font-serif text-xl tracking-wider">Search MIRACLE</span>
+          <button onclick="toggleSearchModal(false)" class="p-1 hover:text-luxury-gold"><i data-lucide="x" class="w-5 h-5"></i></button>
+        </div>
+        <div class="relative flex items-center border-b border-luxury-text dark:border-luxury-darkBorder py-3">
+          <i data-lucide="search" class="w-5 h-5 mr-3 text-luxury-muted"></i>
+          <input type="text" id="searchInput" oninput="searchCatalog(this.value)" placeholder="Search products or lookbooks..." class="flex-grow bg-transparent outline-none text-lg">
+          <button onclick="triggerVoiceSearch()" class="p-1.5 rounded-full hover:bg-luxury-border dark:hover:bg-luxury-darkBorder">
+            <i data-lucide="mic" class="w-4 h-4"></i>
+          </button>
+        </div>
+        <div class="grid grid-cols-2 gap-8 text-xs">
+          <div>
+            <h4 class="font-bold uppercase tracking-wider text-luxury-muted mb-3">Trending Searches</h4>
+            <ul class="space-y-2 font-semibold">
+              <li><button onclick="clickSearchTag('Cashmere Overcoat')" class="hover:text-luxury-gold">Cashmere Overcoat</button></li>
+              <li><button onclick="clickSearchTag('Trainer')" class="hover:text-luxury-gold">Minimalist Trainer</button></li>
+              <li><button onclick="clickSearchTag('Face Oil')" class="hover:text-luxury-gold">Botanical Face Oil</button></li>
+            </ul>
+          </div>
+          <div id="searchResults" class="space-y-3">
+            <h4 class="font-bold uppercase tracking-wider text-luxury-muted">Search results</h4>
+            <p class="text-luxury-muted italic">Begin typing to discover catalog matches.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- COOKIE BANNER -->
+  <div id="cookieBanner" class="fixed bottom-6 left-6 z-40 max-w-xs bg-white dark:bg-luxury-darkCard border border-luxury-border dark:border-luxury-darkBorder p-5 rounded-luxury shadow-luxury space-y-4">
+    <p class="text-[10px] font-semibold text-luxury-muted dark:text-luxury-darkMuted leading-relaxed">
+      We use cookies to curate and personalize your luxury shopping experience. By continuing to browse, you agree to our policies.
+    </p>
+    <div class="flex space-x-2">
+      <button onclick="acceptCookies()" class="px-4 py-2 bg-luxury-text hover:bg-luxury-gold text-white text-[10px] font-bold uppercase tracking-widest rounded-luxury">Accept</button>
+      <button onclick="acceptCookies()" class="px-4 py-2 border border-luxury-border hover:border-luxury-text text-[10px] font-bold uppercase tracking-widest rounded-luxury">Decline</button>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="mt-auto bg-white dark:bg-black border-t border-luxury-border dark:border-luxury-darkBorder text-luxury-text dark:text-luxury-darkText">
+    <div class="mx-auto max-w-7xl px-6 py-12 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div class="space-y-3">
+          <span class="font-serif text-lg tracking-[4px] font-semibold">MIRACLE</span>
+          <p class="text-[10px] text-luxury-muted leading-relaxed">Curating structural, premium apparel and acoustics for minimal aesthetics.</p>
+        </div>
+        <div>
+          <h4 class="text-[10px] font-bold uppercase tracking-widest text-luxury-muted mb-3">Links</h4>
+          <ul class="space-y-1.5 text-xs">
+            <li><button onclick="showPage('shop')" class="hover:text-luxury-gold">Shop</button></li>
+            <li><button onclick="showPage('blogs')" class="hover:text-luxury-gold">Lookbooks</button></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-[10px] font-bold uppercase tracking-widest text-luxury-muted mb-3">Support</h4>
+          <ul class="space-y-1.5 text-xs">
+            <li><button onclick="showPage('dashboard')" class="hover:text-luxury-gold font-bold text-luxury-gold">My Account</button></li>
+            <li><button onclick="toggleChat(true)" class="hover:text-luxury-gold">Client Service</button></li>
+          </ul>
+        </div>
+        <div class="space-y-3">
+          <h4 class="text-[10px] font-bold uppercase tracking-widest text-luxury-muted">Newsletter</h4>
+          <input type="email" placeholder="Join our circle" class="w-full bg-transparent border-b border-luxury-border py-1 text-xs outline-none focus:border-luxury-gold">
+        </div>
+      </div>
+      <div class="mt-12 pt-6 border-t border-luxury-border dark:border-luxury-darkBorder text-center text-[9px] uppercase tracking-wider text-luxury-muted">
+        &copy; 2026 MIRACLE Studio. All Rights Reserved.
+      </div>
+    </div>
+  </footer>
+
+  <!-- PLATFORM LOGIC ENGINE -->
+  <script>
+    // 1. Data Store / State
+    let products = [
+      { id: '1', name: 'Classic Cashmere Overcoat', slug: 'classic-cashmere-overcoat', price: 580, compareAtPrice: 720, rating: 4.8, category: 'fashion', brand: 'COS', image: 'https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?q=80&w=800', description: 'An elegant longline overcoat crafted from exceptionally soft, mid-weight Italian cashmere. Cut in a modern relaxed silhouette with dropped shoulders.', details: { Material: '100% Mongolian Cashmere', Origin: 'Florence, Italy' }, attributes: { colors: ['Beige', 'Black'], sizes: ['S', 'M', 'L'] } },
+      { id: '2', name: 'Silk Ribbed Knit Cardigan', slug: 'silk-ribbed-knit-cardigan', price: 290, compareAtPrice: null, rating: 4.6, category: 'fashion', brand: 'COS', image: 'https://images.unsplash.com/photo-1434389677669-e08b4cac3105?q=80&w=800', description: 'A delicate ribbed knit cardigan featuring a fine silk-cotton blend. Mother-of-pearl buttons add a classic accent.', details: { Material: '70% Silk, 30% Cotton' }, attributes: { colors: ['Oatmeal', 'Sage'], sizes: ['S', 'M'] } },
+      { id: '3', name: 'Miracle Sound ANC Headphones', slug: 'miracle-sound-headphones', price: 399, compareAtPrice: 450, rating: 4.9, category: 'electronics', brand: 'Apple', image: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=800', description: 'Premium active noise-cancelling wireless headphones with custom high-fidelity drivers and full-grain leather wraps.', details: { Battery: '38 Hours', NoiseCancelling: 'Active' }, attributes: { colors: ['Space Grey', 'Chalk White'], sizes: ['One Size'] } },
+      { id: '4', name: 'Botanical Face Oil', slug: 'botanical-face-oil', price: 85, compareAtPrice: null, rating: 4.7, category: 'beauty', brand: 'Aesop', image: 'https://images.unsplash.com/photo-1620916566398-39f1143ab7be?q=80&w=800', description: 'A concentrated daily oil formulation enriched with organic seed extracts to restore skin texture and hydration.', details: { Volume: '50ml', SkinType: 'Sensitive' }, attributes: { colors: ['Glass Amber'], sizes: ['50ml'] } },
+      { id: '5', name: 'Minimalist Leather Trainer', slug: 'minimalist-leather-trainer', price: 240, compareAtPrice: 280, rating: 4.5, category: 'footwear', brand: 'Nike Lab', image: 'https://images.unsplash.com/photo-1549298916-b41d501d3772?q=80&w=800', description: 'Timeless white low-top trainers made from durable, premium Nappa leather on reinforced rubber soles.', details: { Upper: 'Calfskin Nappa', Sole: 'Margom Italian Rubber' }, attributes: { colors: ['White', 'Black'], sizes: ['US 9', 'US 10'] } },
+      { id: '6', name: 'Signature Leather Tote', slug: 'signature-leather-tote', price: 450, compareAtPrice: null, rating: 4.9, category: 'accessories', brand: 'MIRACLE Studio', image: 'https://images.unsplash.com/photo-1584917865442-de89df76afd3?q=80&w=800', description: 'A spacious structural tote bag crafted with pebbled Italian calfskin and detachable interior wallet pockets.', details: { Dimensions: '35cm x 40cm', Leather: 'Full-Grain Calfskin' }, attributes: { colors: ['Tan', 'Black'], sizes: ['Standard'] } },
+      { id: '7', name: 'Ceramic Candle Ensemble', slug: 'ceramic-candle-ensemble', price: 95, compareAtPrice: 120, rating: 4.4, category: 'home', brand: 'MIRACLE Studio', image: 'https://images.unsplash.com/photo-1603006905003-be475563bc59?q=80&w=800', description: 'Three hand-thrown ceramic jars filled with non-toxic soy wax. Scents include Cedarwood and Sandalwood.', details: { Vessels: 'Ceramic Pottery', Wax: 'Soy Wax' }, attributes: { colors: ['Mixed Glaze'], sizes: ['Pack of 3'] } }
+    ];
+
+    let cart = [];
+    let currentCurrency = 'USD';
+    let currentLanguage = 'EN';
+    let activeProduct = null;
+    let selectedColor = '';
+    let selectedSize = '';
+    let sortOption = 'newest';
+    let activeFilters = { category: '', brand: '' };
+    let checkoutPaymentMethod = 'card';
+
+    const currencySymbols = { USD: '$', EUR: '€', GBP: '£', INR: '₹' };
+    const currencyRates = { USD: 1, EUR: 0.92, GBP: 0.79, INR: 83.0 };
+
+    // Initialize Page
+    window.addEventListener('DOMContentLoaded', () => {
+      lucide.createIcons();
+      renderBestSellers();
+      renderShopCatalog();
+      renderShopFilters();
+      startCountdown();
+
+      // Check cookie banner
+      if (localStorage.getItem('cookies_accepted')) {
+        document.getElementById('cookieBanner').style.display = 'none';
+      }
+    });
+
+    // Theme Engine
+    function toggleTheme() {
+      const html = document.documentElement;
+      const themeIcon = document.getElementById('themeIcon');
+      if (html.classList.contains('dark')) {
+        html.classList.remove('dark');
+        themeIcon.setAttribute('data-lucide', 'moon');
+      } else {
+        html.classList.add('dark');
+        themeIcon.setAttribute('data-lucide', 'sun');
+      }
+      lucide.createIcons();
+    }
+
+    // Currency Switcher
+    function changeCurrency(curr) {
+      currentCurrency = curr;
+      document.getElementById('activeCurrency').innerText = curr;
+      renderBestSellers();
+      renderShopCatalog();
+      updateCartDisplay();
+    }
+
+    // Language Switcher
+    function changeLanguage(lang) {
+      currentLanguage = lang;
+      document.getElementById('activeLanguage').innerText = lang;
+    }
+
+    // Price conversion formatter
+    function formatPrice(val) {
+      const converted = val * currencyRates[currentCurrency];
+      return `${currencySymbols[currentCurrency]}${converted.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+    }
+
+    // Router views toggler
+    function showPage(pageId, filterParam = '') {
+      document.querySelectorAll('.page-view').forEach(view => view.classList.add('hidden'));
+      document.getElementById(`page-${pageId}`).classList.remove('hidden');
+      window.scrollTo(0, 0);
+
+      if (pageId === 'shop') {
+        if (filterParam) {
+          activeFilters.category = filterParam;
+          document.querySelectorAll(`input[name="categoryFilter"]`).forEach(input => {
+            input.checked = input.value === filterParam;
+          });
+        }
+        renderShopCatalog();
+      }
+    }
+
+    // Countdown timer
+    function startCountdown() {
+      let timer = 18 * 60 * 60;
+      setInterval(() => {
+        if (timer > 0) {
+          timer--;
+          const hrs = Math.floor(timer / 3600);
+          const mins = Math.floor((timer % 3600) / 60);
+          const secs = timer % 60;
+          document.getElementById('countdownTimer').innerText = 
+            `${hrs.toString().padStart(2, '0')}:${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+        }
+      }, 1000);
+    }
+
+    // Render best sellers
+    function renderBestSellers() {
+      const container = document.getElementById('bestSellersContainer');
+      container.innerHTML = '';
+      products.filter(p => p.rating >= 4.7).slice(0, 4).forEach(product => {
+        container.innerHTML += createProductCardHtml(product);
+      });
+      lucide.createIcons();
+    }
+
+    // Render product HTML card
+    function createProductCardHtml(product) {
+      const hasDiscount = product.compareAtPrice !== null;
+      return `
+        <div onclick="openProductModal('${product.id}')" class="group relative flex flex-col overflow-hidden bg-white dark:bg-luxury-darkCard border border-luxury-border dark:border-luxury-darkBorder rounded-luxury shadow-luxury hover:shadow-luxuryHover transition-all duration-300 cursor-pointer">
+          <div class="relative w-full aspect-[3/4] overflow-hidden bg-luxury-bg/50 dark:bg-luxury-darkBg">
+            <img src="${product.image}" class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" alt="${product.name}">
+            <div class="absolute top-3 left-3 flex flex-col space-y-1">
+              ${hasDiscount ? `<span class="bg-luxury-danger text-white text-[8px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-luxury">Sale</span>` : ''}
+              ${product.rating >= 4.8 ? `<span class="bg-luxury-gold text-white text-[8px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-luxury">Editor Pick</span>` : ''}
+            </div>
+            <button class="absolute top-3 right-3 p-1.5 rounded-full bg-white/80 dark:bg-black/60 backdrop-blur-xs text-luxury-text dark:text-white hover:text-luxury-danger transition-colors">
+              <i data-lucide="heart" class="w-3.5 h-3.5"></i>
+            </button>
+          </div>
+          <div class="p-4 flex flex-col justify-between flex-grow space-y-2">
+            <div class="space-y-0.5">
+              <span class="text-[8px] font-bold text-luxury-gold uppercase tracking-widest">${product.brand}</span>
+              <h3 class="font-serif text-sm font-semibold tracking-wide truncate">${product.name}</h3>
+            </div>
+            <div class="flex items-baseline space-x-2 pt-1">
+              <span class="text-xs font-bold text-luxury-text dark:text-luxury-darkText">${formatPrice(product.price)}</span>
+              ${hasDiscount ? `<span class="text-[10px] text-luxury-muted line-through">${formatPrice(product.compareAtPrice)}</span>` : ''}
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    // Render Filters
+    function renderShopFilters() {
+      const cats = [...new Set(products.map(p => p.category))];
+      const brands = [...new Set(products.map(p => p.brand))];
+
+      const catContainer = document.getElementById('categoryFilters');
+      catContainer.innerHTML = `<label class="flex items-center space-x-2"><input type="radio" name="categoryFilter" value="" checked onchange="filterCategory(this.value)"><span>All Categories</span></label>`;
+      cats.forEach(c => {
+        catContainer.innerHTML += `<label class="flex items-center space-x-2"><input type="radio" name="categoryFilter" value="${c}" onchange="filterCategory(this.value)"><span class="capitalize">${c}</span></label>`;
+      });
+
+      const brandContainer = document.getElementById('brandFilters');
+      brandContainer.innerHTML = `<label class="flex items-center space-x-2"><input type="radio" name="brandFilter" value="" checked onchange="filterBrand(this.value)"><span>All Brands</span></label>`;
+      brands.forEach(b => {
+        brandContainer.innerHTML += `<label class="flex items-center space-x-2"><input type="radio" name="brandFilter" value="${b}" onchange="filterBrand(this.value)"><span>${b}</span></label>`;
+      });
+    }
+
+    // Filter Trigger
+    function filterCategory(val) {
+      activeFilters.category = val;
+      renderShopCatalog();
+    }
+    function filterBrand(val) {
+      activeFilters.brand = val;
+      renderShopCatalog();
+    }
+
+    // Reset Filters
+    function resetFilters() {
+      activeFilters = { category: '', brand: '' };
+      document.querySelectorAll('input[type="radio"]').forEach(r => {
+        if (r.value === '') r.checked = true;
+      });
+      renderShopCatalog();
+    }
+
+    // Sort Handler
+    function updateSort(val) {
+      sortOption = val;
+      renderShopCatalog();
+    }
+
+    // Render Shop Catalog
+    function renderShopCatalog() {
+      const container = document.getElementById('productsGrid');
+      container.innerHTML = '';
+
+      let filtered = [...products];
+      if (activeFilters.category) filtered = filtered.filter(p => p.category === activeFilters.category);
+      if (activeFilters.brand) filtered = filtered.filter(p => p.brand === activeFilters.brand);
+
+      if (sortOption === 'low-to-high') filtered.sort((a, b) => a.price - b.price);
+      if (sortOption === 'high-to-low') filtered.sort((a, b) => b.price - a.price);
+      if (sortOption === 'popular') filtered.sort((a, b) => b.rating - a.rating);
+
+      filtered.forEach(product => {
+        container.innerHTML += createProductCardHtml(product);
+      });
+      lucide.createIcons();
+    }
+
+    // Open Product Details Modal
+    function openProductModal(id) {
+      const product = products.find(p => p.id === id);
+      if (!product) return;
+      activeProduct = product;
+
+      document.getElementById('detailProductName').innerText = product.name;
+      document.getElementById('detailBrandName').innerText = product.brand;
+      document.getElementById('detailProductPrice').innerText = formatPrice(product.price);
+      document.getElementById('detailProductComparePrice').innerText = product.compareAtPrice ? formatPrice(product.compareAtPrice) : '';
+      document.getElementById('detailProductDesc').innerText = product.description;
+      document.getElementById('detailMainImage').src = product.image;
+
+      // Variants
+      const variantContainer = document.getElementById('detailProductVariants');
+      variantContainer.innerHTML = '';
+      
+      if (product.attributes.colors) {
+        let colorsHtml = `<div class="space-y-1.5"><span class="text-[9px] uppercase tracking-wider text-luxury-muted font-bold">Color Selection</span><div class="flex space-x-2">`;
+        product.attributes.colors.forEach((col, idx) => {
+          colorsHtml += `<button onclick="selectColor('${col}', this)" class="w-6 h-6 rounded-full border transition-all ${idx === 0 ? 'border-luxury-gold ring-1 ring-luxury-gold' : 'border-luxury-border'}" style="background-color: ${col.toLowerCase()}" title="${col}"></button>`;
+        });
+        colorsHtml += `</div></div>`;
+        variantContainer.innerHTML += colorsHtml;
+        selectedColor = product.attributes.colors[0];
+      }
+
+      if (product.attributes.sizes) {
+        let sizesHtml = `<div class="space-y-1.5"><span class="text-[9px] uppercase tracking-wider text-luxury-muted font-bold">Size Selection</span><div class="flex space-x-2">`;
+        product.attributes.sizes.forEach((sz, idx) => {
+          sizesHtml += `<button onclick="selectSize('${sz}', this)" class="px-2.5 py-1 border text-[10px] font-bold rounded-luxury uppercase transition-all ${idx === 0 ? 'bg-luxury-text text-white dark:bg-white dark:text-luxury-text' : 'border-luxury-border text-luxury-muted'}">${sz}</button>`;
+        });
+        sizesHtml += `</div></div>`;
+        variantContainer.innerHTML += sizesHtml;
+        selectedSize = product.attributes.sizes[0];
+      }
+
+      // Thumbnails
+      const thumbContainer = document.getElementById('detailThumbs');
+      thumbContainer.innerHTML = `
+        <button onclick="changeDetailImage('${product.image}')" class="relative w-14 aspect-[3/4] flex-shrink-0 border border-luxury-gold rounded-luxury overflow-hidden">
+          <img src="${product.image}" class="w-full h-full object-cover">
+        </button>
+        <button onclick="changeDetailImage('https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=800')" class="relative w-14 aspect-[3/4] flex-shrink-0 border border-luxury-border rounded-luxury overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=800" class="w-full h-full object-cover">
+        </button>
+      `;
+
+      document.getElementById('detailModal').classList.remove('hidden');
+    }
+
+    function closeProductModal() {
+      document.getElementById('detailModal').classList.add('hidden');
+    }
+
+    function selectColor(color, btn) {
+      selectedColor = color;
+      btn.parentElement.querySelectorAll('button').forEach(b => {
+        b.classList.remove('border-luxury-gold', 'ring-1', 'ring-luxury-gold');
+        b.classList.add('border-luxury-border');
+      });
+      btn.classList.add('border-luxury-gold', 'ring-1', 'ring-luxury-gold');
+    }
+
+    function selectSize(size, btn) {
+      selectedSize = size;
+      btn.parentElement.querySelectorAll('button').forEach(b => {
+        b.className = "px-2.5 py-1 border text-[10px] font-bold rounded-luxury uppercase transition-all border-luxury-border text-luxury-muted";
+      });
+      btn.className = "px-2.5 py-1 border text-[10px] font-bold rounded-luxury uppercase transition-all bg-luxury-text text-white dark:bg-white dark:text-luxury-text";
+    }
+
+    function changeDetailImage(src) {
+      document.getElementById('detailMainImage').src = src;
+    }
+
+    let is360Mode = false;
+    function toggle360() {
+      is360Mode = !is360Mode;
+      const mainImg = document.getElementById('detailMainImage');
+      if (is360Mode) {
+        mainImg.src = 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=800';
+      } else {
+        mainImg.src = activeProduct.image;
+      }
+    }
+
+    // Cart Drawer Controls
+    function toggleCartDrawer(open) {
+      const drawer = document.getElementById('cartDrawer');
+      if (open) {
+        drawer.classList.remove('hidden');
+        updateCartDisplay();
+      } else {
+        drawer.classList.add('hidden');
+      }
+    }
+
+    // Add active product to Cart
+    function addActiveProductToCart() {
+      if (!activeProduct) return;
+      const existing = cart.find(item => item.id === activeProduct.id && item.color === selectedColor && item.size === selectedSize);
+      if (existing) {
+        existing.quantity++;
+      } else {
+        cart.push({
+          id: activeProduct.id,
+          name: activeProduct.name,
+          price: activeProduct.price,
+          image: activeProduct.image,
+          color: selectedColor,
+          size: selectedSize,
+          quantity: 1
+        });
+      }
+      closeProductModal();
+      toggleCartDrawer(true);
+    }
+
+    // Update Cart numbers
+    function updateCartDisplay() {
+      const container = document.getElementById('cartDrawerItems');
+      container.innerHTML = '';
+      let subtotal = 0;
+      let count = 0;
+
+      cart.forEach((item, index) => {
+        subtotal += item.price * item.quantity;
+        count += item.quantity;
+
+        container.innerHTML += `
+          <div class="flex items-start space-x-4 border-b border-luxury-border/50 pb-4">
+            <img src="${item.image}" class="w-16 h-20 object-cover rounded-luxury border" alt="">
+            <div class="flex-grow space-y-1">
+              <div class="flex justify-between font-bold text-xs">
+                <span>${item.name}</span>
+                <span>${formatPrice(item.price * item.quantity)}</span>
+              </div>
+              <p class="text-[9px] uppercase tracking-wider text-luxury-muted font-bold">${item.color} / Size ${item.size}</p>
+              <div class="flex justify-between items-center pt-2">
+                <div class="flex items-center border border-luxury-border rounded-luxury overflow-hidden">
+                  <button onclick="adjustQty(${index}, -1)" class="px-2 py-0.5 text-luxury-muted hover:text-luxury-text">-</button>
+                  <span class="px-2 text-xs font-bold">${item.quantity}</span>
+                  <button onclick="adjustQty(${index}, 1)" class="px-2 py-0.5 text-luxury-muted hover:text-luxury-text">+</button>
+                </div>
+                <button onclick="removeCartItem(${index})" class="text-[9px] uppercase font-bold text-luxury-danger">Remove</button>
+              </div>
+            </div>
+          </div>
+        `;
+      });
+
+      document.getElementById('cartCountHeader').innerText = count;
+      document.getElementById('cartCountBadge').innerText = count;
+      if (count > 0) {
+        document.getElementById('cartCountBadge').classList.remove('hidden');
+      } else {
+        document.getElementById('cartCountBadge').classList.add('hidden');
+      }
+
+      document.getElementById('cartSubtotal').innerText = formatPrice(subtotal);
+      document.getElementById('cartGrandTotal').innerText = formatPrice(subtotal);
+    }
+
+    function adjustQty(index, amt) {
+      cart[index].quantity += amt;
+      if (cart[index].quantity < 1) cart[index].quantity = 1;
+      updateCartDisplay();
+    }
+
+    function removeCartItem(index) {
+      cart.splice(index, 1);
+      updateCartDisplay();
+    }
+
+    // Go to checkout view
+    function goToCheckout() {
+      toggleCartDrawer(false);
+      showPage('checkout');
+      updateCheckoutSummary();
+    }
+
+    function updateCheckoutSummary() {
+      const container = document.getElementById('checkoutSummaryItems');
+      container.innerHTML = '';
+      let subtotal = 0;
+
+      cart.forEach(item => {
+        subtotal += item.price * item.quantity;
+        container.innerHTML += `
+          <div class="flex justify-between items-center text-xs">
+            <span class="font-semibold">${item.name} (x${item.quantity})</span>
+            <span class="font-bold">${formatPrice(item.price * item.quantity)}</span>
+          </div>
+        `;
+      });
+
+      const shipping = subtotal > 200 ? 0 : 15;
+      const tax = subtotal * 0.08;
+      const total = subtotal + shipping + tax;
+
+      document.getElementById('checkoutSubtotal').innerText = formatPrice(subtotal);
+      document.getElementById('checkoutShipping').innerText = shipping === 0 ? 'Free' : formatPrice(shipping);
+      document.getElementById('checkoutTax').innerText = formatPrice(tax);
+      document.getElementById('checkoutTotal').innerText = formatPrice(total);
+    }
+
+    function setCheckoutPayment(method) {
+      checkoutPaymentMethod = method;
+      const area = document.getElementById('checkoutPaymentArea');
+      if (method === 'card') {
+        area.innerHTML = `
+          <div class="space-y-3">
+            <div><label class="uppercase block mb-1">Card Number</label><input type="text" placeholder="•••• •••• •••• ••••" class="w-full bg-transparent border border-luxury-border rounded-luxury px-3 py-2 outline-none"></div>
+            <div class="grid grid-cols-2 gap-4">
+              <div><label class="uppercase block mb-1">Expiry</label><input type="text" placeholder="MM/YY" class="w-full bg-transparent border border-luxury-border rounded-luxury px-3 py-2 outline-none"></div>
+              <div><label class="uppercase block mb-1">CVC</label><input type="text" placeholder="•••" class="w-full bg-transparent border border-luxury-border rounded-luxury px-3 py-2 outline-none"></div>
+            </div>
+          </div>
+        `;
+      } else if (method === 'upi') {
+        area.innerHTML = `
+          <div class="flex flex-col items-center space-y-3 text-center">
+            <i data-lucide="qr-code" class="w-20 h-20 text-luxury-text dark:text-white"></i>
+            <p class="text-[9px] uppercase tracking-wider text-luxury-gold">Scan QR barcode to authorize pay</p>
+            <input type="text" placeholder="username@okaxis" class="w-full bg-transparent border border-luxury-border rounded-luxury px-3 py-2 outline-none">
+          </div>
+        `;
+        lucide.createIcons();
+      } else {
+        area.innerHTML = `<p>Authorized cash on delivery. Pay when courier delivers items.</p>`;
+      }
+    }
+
+    // Place Order Confetti & trigger text file download
+    function placeOrderDemo(e) {
+      e.preventDefault();
+      if (cart.length === 0) return;
+
+      const orderNumber = `MRL-${Date.now().toString().slice(-6)}`;
+      
+      // Blast Confetti
+      confetti({
+        particleCount: 180,
+        spread: 90,
+        origin: { y: 0.6 },
+        colors: ['#C8A97E', '#111111', '#FAFAF8']
+      });
+
+      // Clear states
+      cart = [];
+      updateCartDisplay();
+      
+      alert(`Success! Order ${orderNumber} placed. Generating Invoice Download.`);
+      
+      // Dynamic Invoice PDF/txt mock
+      const invTxt = `
+MIRACLE STUDIO - INVOICE
+========================
+Order Ref: ${orderNumber}
+Date: ${new Date().toLocaleDateString()}
+Status: Approved
+
+Thank you for choosing MIRACLE. Discover the Extraordinary.
+      `;
+      const blob = new Blob([invTxt], { type: 'text/plain' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = `Invoice-${orderNumber}.txt`;
+      link.click();
+      
+      showPage('dashboard');
+    }
+
+    // Live Chat Engine
+    function toggleChat(open) {
+      const win = document.getElementById('chatWindow');
+      if (open === undefined) {
+        win.classList.toggle('hidden');
+      } else if (open) {
+        win.classList.remove('hidden');
+      } else {
+        win.classList.add('hidden');
+      }
+    }
+
+    function sendChatMessage(text) {
+      const messages = document.getElementById('chatMessages');
+      // Append user
+      messages.innerHTML += `
+        <div class="flex justify-end">
+          <div class="max-w-[80%] p-3 rounded-luxury bg-luxury-text text-white">
+            ${text}
+          </div>
+        </div>
+      `;
+      
+      // Simulated Bot reply
+      setTimeout(() => {
+        let reply = "Advisor will review your request.";
+        if (text.includes('Track')) reply = "You can view your order shipping stepper directly in the 'User Dashboard' tab above.";
+        if (text.includes('Returns')) reply = "We offer a 14-day complimentary return policy on all unworn items.";
+        if (text.includes('agent')) reply = "Connecting to agent client line. Please wait...";
+
+        messages.innerHTML += `
+          <div class="flex justify-start">
+            <div class="max-w-[80%] p-3 rounded-luxury bg-luxury-bg border text-luxury-text">
+              ${reply}
+            </div>
+          </div>
+        `;
+        messages.scrollTo(0, messages.scrollHeight);
+      }, 800);
+    }
+
+    // Search Actions
+    function toggleSearchModal(open) {
+      const modal = document.getElementById('searchModal');
+      if (open) {
+        modal.classList.remove('hidden');
+        document.getElementById('searchInput').focus();
+      } else {
+        modal.classList.add('hidden');
+      }
+    }
+
+    function clickSearchTag(tag) {
+      document.getElementById('searchInput').value = tag;
+      searchCatalog(tag);
+    }
+
+    // Global Search Catalog
+    function searchCatalog(q) {
+      const resultsContainer = document.getElementById('searchResults');
+      resultsContainer.innerHTML = '';
+
+      if (!q.trim()) {
+        resultsContainer.innerHTML = `<h4 class="font-bold uppercase tracking-wider text-luxury-muted">Search results</h4><p class="text-luxury-muted italic">Begin typing to discover catalog matches.</p>`;
+        return;
+      }
+
+      const matched = products.filter(p => p.name.toLowerCase().includes(q.toLowerCase()));
+      if (matched.length === 0) {
+        resultsContainer.innerHTML = `<p class="text-luxury-muted italic">No items found for "${q}"</p>`;
+        return;
+      }
+
+      resultsContainer.innerHTML = `<h4 class="font-bold uppercase tracking-wider text-luxury-muted mb-2">Matches</h4><ul class="space-y-2">`;
+      matched.forEach(item => {
+        resultsContainer.innerHTML += `
+          <li>
+            <button onclick="selectSearchedProduct('${item.id}')" class="flex items-center space-x-2 text-left hover:text-luxury-gold">
+              <img src="${item.image}" class="w-6 h-8 object-cover rounded-sm">
+              <span>${item.name} - ${formatPrice(item.price)}</span>
+            </button>
+          </li>
+        `;
+      });
+      resultsContainer.innerHTML += `</ul>`;
+    }
+
+    function selectSearchedProduct(id) {
+      toggleSearchModal(false);
+      openProductModal(id);
+    }
+
+    function triggerVoiceSearch() {
+      alert("Microphone active... Speak now.");
+      document.getElementById('searchInput').value = 'Cashmere overcoat';
+      searchCatalog('Cashmere overcoat');
+    }
+
+    // Cookie Banner Accept
+    function acceptCookies() {
+      localStorage.setItem('cookies_accepted', 'true');
+      document.getElementById('cookieBanner').style.display = 'none';
+    }
+
+    // Admin Console CRUD Products
+    function adminAddProduct(e) {
+      e.preventDefault();
+      const name = document.getElementById('apName').value;
+      const price = parseFloat(document.getElementById('apPrice').value);
+      const stock = parseInt(document.getElementById('apStock').value);
+      const sku = document.getElementById('apSku').value;
+      const category = document.getElementById('apCategory').value;
+      const desc = document.getElementById('apDesc').value;
+
+      const newP = {
+        id: `ap_${Date.now()}`,
+        name,
+        slug: name.toLowerCase().replace(/[^a-z0-9]+/g, '-'),
+        price,
+        compareAtPrice: null,
+        rating: 5.0,
+        category,
+        brand: 'MIRACLE Studio',
+        image: 'https://images.unsplash.com/photo-1584917865442-de89df76afd3?q=80&w=800',
+        description: desc,
+        attributes: { colors: ['Default'], sizes: ['Standard'] }
+      };
+
+      products.push(newP);
+      renderBestSellers();
+      renderShopCatalog();
+      renderAdminCatalog();
+      
+      // Update KPIs
+      document.getElementById('adminKpiProducts').innerText = products.length;
+
+      // Reset form
+      document.getElementById('apName').value = '';
+      document.getElementById('apPrice').value = '';
+      document.getElementById('apStock').value = '';
+      document.getElementById('apSku').value = '';
+      document.getElementById('apDesc').value = '';
+
+      alert(`Product ${name} successfully cataloged.`);
+    }
+
+    function renderAdminCatalog() {
+      const container = document.getElementById('adminCatalogList');
+      container.innerHTML = '';
+      products.forEach((prod, index) => {
+        container.innerHTML += `
+          <div class="flex justify-between items-center border-b border-luxury-border pb-2 text-xs">
+            <div>
+              <p class="font-semibold">${prod.name}</p>
+              <p class="text-[9px] text-luxury-muted">SKU: ${prod.sku || 'N/A'}</p>
+            </div>
+            <div class="flex items-center space-x-3">
+              <span class="font-mono font-bold">${formatPrice(prod.price)}</span>
+              <button onclick="adminDeleteProduct(${index})" class="text-luxury-danger hover:underline"><i data-lucide="trash-2" class="w-3.5 h-3.5"></i></button>
+            </div>
+          </div>
+        `;
+      });
+      lucide.createIcons();
+    }
+
+    function adminDeleteProduct(idx) {
+      products.splice(idx, 1);
+      renderBestSellers();
+      renderShopCatalog();
+      renderAdminCatalog();
+      document.getElementById('adminKpiProducts').innerText = products.length;
+    }
+
+    // Hook Admin Catalog Tab opening
+    const originalShowPage = showPage;
+    showPage = function(pageId, filterParam) {
+      originalShowPage(pageId, filterParam);
+      if (pageId === 'admin') {
+        renderAdminCatalog();
+      }
+    };
+  </script>
+
+</body>
+</html>

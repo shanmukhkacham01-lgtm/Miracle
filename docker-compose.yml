@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15-alpine
+    container_name: miracle_postgres
+    environment:
+      POSTGRES_USER: miracle_user
+      POSTGRES_PASSWORD: miracle_secure_password
+      POSTGRES_DB: miracle_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    restart: always
+
+volumes:
+  pgdata:
+    driver: local
