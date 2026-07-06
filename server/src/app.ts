@@ -24,7 +24,9 @@ app.use(helmet({
 
 const allowedOrigins = [
   process.env.FRONTEND_URL || 'http://localhost:3000',
-  'http://localhost:3001', // Admin portal
+  process.env.ADMIN_URL || 'http://localhost:3001',
+  'http://localhost:3000',
+  'http://localhost:3001',
 ];
 
 const corsOptions = {

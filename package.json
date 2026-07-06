@@ -1,40 +1,18 @@
 {
-  "name": "miracle-client",
+  "name": "miracle-workspace",
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
     "dev:server": "npm run dev --prefix server",
+    "dev:client": "npm run dev --prefix client",
     "dev:admin": "npm run dev --prefix admin-portal",
-    "dev:all": "npx -y concurrently \"npm run dev\" \"npm run dev:server\" \"npm run dev:admin\"",
-    "build": "cross-env NODE_ENV=production next build",
-    "start": "next start",
-    "lint": "next lint"
-  },
-  "dependencies": {
-    "@hookform/resolvers": "^3.3.4",
-    "@reduxjs/toolkit": "^2.2.3",
-    "@tanstack/react-query": "^5.29.2",
-    "axios": "^1.6.8",
-    "canvas-confetti": "^1.9.3",
-    "framer-motion": "^11.1.7",
-    "lucide-react": "^0.368.0",
-    "next": "^14.2.1",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-hook-form": "^7.51.3",
-    "react-redux": "^9.1.1",
-    "zod": "^3.22.4"
+    "dev": "npx -y concurrently \"npm run dev:server\" \"npm run dev:client\" \"npm run dev:admin\"",
+    "build:server": "npm run build --prefix server",
+    "build:client": "npm run build --prefix client",
+    "build:admin": "npm run build --prefix admin-portal",
+    "build": "npm run build:client"
   },
   "devDependencies": {
-    "@types/canvas-confetti": "^1.6.4",
-    "@types/node": "^20.12.7",
-    "@types/react": "^18.2.79",
-    "@types/react-dom": "^18.2.25",
-    "autoprefixer": "^10.4.19",
-    "cross-env": "^10.1.0",
-    "postcss": "^8.4.38",
-    "tailwindcss": "^3.4.3",
-    "typescript": "^5.4.5"
+    "concurrently": "^8.2.2"
   }
 }
