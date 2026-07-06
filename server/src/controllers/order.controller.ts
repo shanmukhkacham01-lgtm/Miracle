@@ -261,10 +261,10 @@ export const createOrder = async (req: AuthenticatedRequest, res: Response, next
         orderNumber,
         grandTotal,
         createdAt: new Date(),
-        items: cart.items.map((i) => ({
-          name: i.product.name,
+        items: orderItemsData.map((i: any) => ({
+          name: i.name,
           quantity: i.quantity,
-          price: i.product.price,
+          price: i.price,
         })),
         shippingAddress: shippingAddr ? {
           street: shippingAddr.street,

@@ -5,9 +5,9 @@ import { AuthenticatedRequest } from '../middleware/auth.middleware';
 
 export const getCart = async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
   try {
-    const userId = req.user?.id;
+    const userId = req.user?.id!;
 
-    let cart = await prisma.cart.findUnique({
+    let cart: any = await prisma.cart.findUnique({
       where: { userId },
       include: {
         items: {
@@ -68,9 +68,9 @@ export const addToCart = async (req: AuthenticatedRequest, res: Response, next: 
       return next(new AppError(`Insufficient stock. Only ${product.stock} items available.`, 400));
     }
 
-    let cart = await prisma.cart.findUnique({ where: { userId } });
+    let cart: any = await prisma.cart.findUnique({ where: { userId } });
     if (!cart) {
-      cart = await prisma.cart.create({ data: { userId } });
+      cart = await prisma.cart.create({ data: { userId: userId! } });
     }
 
     // Check if item with same product, size, and color already exists in cart

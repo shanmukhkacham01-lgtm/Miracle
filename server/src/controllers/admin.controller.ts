@@ -537,13 +537,15 @@ export const getAdminAddresses = async (req: Request, res: Response, next: NextF
 
 export const createAdminAddress = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const { userId, street, city, state, postalCode, country } = req.body;
-    if (!userId || !street || !city || !state || !postalCode || !country) {
-      return next(new AppError('Please provide all address details and userId.', 400));
+    const { userId, street, city, state, postalCode, country, name, phone } = req.body;
+    if (!userId || !street || !city || !state || !postalCode || !country || !name || !phone) {
+      return next(new AppError('Please provide all address details including name and phone.', 400));
     }
     const address = await prisma.address.create({
       data: {
         userId,
+        name,
+        phone,
         street,
         city,
         state,
@@ -651,7 +653,7 @@ export const createBrand = async (req: Request, res: Response, next: NextFunctio
     if (!name) return next(new AppError('Brand name required.', 400));
     const slug = name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
     const brand = await prisma.brand.create({
-      data: { name, slug, image },
+      data: { name, slug, logo: image },
     });
     res.status(201).json({ status: 'success', brand });
   } catch (error) {
@@ -668,7 +670,7 @@ export const updateBrand = async (req: Request, res: Response, next: NextFunctio
       data.name = name;
       data.slug = name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
     }
-    if (image !== undefined) data.image = image;
+    if (image !== undefined) data.logo = image;
     const brand = await prisma.brand.update({
       where: { id },
       data,
